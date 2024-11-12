@@ -15,7 +15,7 @@ export default defineConfig({
         author: "https://github.com/halcarleton",
         description:
           "Modifies the DuChinese graded reader UI to make it compatible with the Migaku extension.",
-        license: "Apache 2.0",
+        license: "Apache-2.0",
         namespace: "https://github.com/halcarleton",
         include: ["https://duchinese.net/*"],
         "run-at": "document-start",
