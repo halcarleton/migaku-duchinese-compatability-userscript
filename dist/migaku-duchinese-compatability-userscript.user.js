@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         migaku-duchinese-compatability-userscript
 // @namespace    https://github.com/halcarleton
-// @version      0.1.0
+// @version      0.1.1
 // @author       https://github.com/halcarleton
 // @description  Modifies the DuChinese graded reader UI to make it compatible with the Migaku extension.
-// @license      Apache 2.0
+// @license      Apache-2.0
 // @include      https://duchinese.net/*
 // @run-at       document-start
 // ==/UserScript==
