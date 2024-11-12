@@ -14,3 +14,22 @@ export async function onCharSetChange(
     fn({ charSet: selectedCharSet });
   });
 }
+
+export async function onClassChange(
+  element: Element,
+  callback: (previous: string, next: string) => void
+) {
+  const observer = new MutationObserver((mutations) => {
+    const firstMutation = mutations[0];
+    const previousClassName = firstMutation?.oldValue || "";
+    const nextClassName = element.className;
+
+    callback(previousClassName, nextClassName);
+  });
+
+  observer.observe(element, {
+    attributes: true,
+    attributeFilter: ["class"],
+    attributeOldValue: true,
+  });
+}

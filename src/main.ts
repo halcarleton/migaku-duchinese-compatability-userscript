@@ -1,3 +1,4 @@
+import { manageMigakuBodyClasses } from "./lib/dom-operations/migaku";
 import initialize from "./lib/initialize";
 import { isLessonPage } from "./lib/url";
 
@@ -35,6 +36,8 @@ async function main() {
   window.addEventListener("popstate", handleNavigateEvent as any);
 
   navigation.addEventListener("navigate", handleNavigateEvent);
+
+  manageMigakuBodyClasses();
 }
 
 main();
