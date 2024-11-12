@@ -1,13 +1,17 @@
 import { waitFor, type WaitForOptions } from "../wait";
 
-export function getAllBySelector(selector: string): Element[] {
-  return [...document.querySelectorAll(selector)];
+export function getAllBySelector(
+  selector: string,
+  parent?: Element
+): Element[] {
+  return [...(parent || document).querySelectorAll(selector)];
 }
 
 export async function getNBySelector(
   selector: string,
   qty: number,
-  options: Partial<WaitForOptions> = {}
+  options: Partial<WaitForOptions> = {},
+  parent?: Element
 ): Promise<Element[]> {
   let localOptions: Partial<WaitForOptions> = {
     ...options,
@@ -18,7 +22,7 @@ export async function getNBySelector(
 
   let foundCount = 0;
   const matchedElements = await waitFor(() => {
-    const elements = getAllBySelector(selector);
+    const elements = getAllBySelector(selector, parent);
 
     if (elements.length === qty) {
       return elements;
@@ -31,8 +35,12 @@ export async function getNBySelector(
   return matchedElements;
 }
 
-export async function getBySelector(selector: string): Promise<Element> {
-  const matchedElements = await getNBySelector(selector, 1);
+export async function getBySelector(
+  selector: string,
+  options: Partial<WaitForOptions> = {},
+  parent?: Element
+): Promise<Element> {
+  const matchedElements = await getNBySelector(selector, 1, options, parent);
 
   return matchedElements[0];
 }
