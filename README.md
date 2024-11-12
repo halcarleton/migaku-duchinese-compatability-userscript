@@ -1,47 +1,35 @@
-# Svelte + TS + Vite
+# Migaku x DuChinese Compatibility User Script
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+This user script is intended to make the DuChinese web application compatible with the Migaku language learning browser extension. It accomplishes this primarily by replacing DuChinese's dynamic lesson text with plain text, which allows Migaku to read the text and inject it's dynamic UI elements.
 
-## Recommended IDE Setup
+## Installation
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+Releases are tagged on the `release` branch using semantic versioning. All released versions can be found on the [tags page of this repository](https://github.com/halcarleton/migaku-duchinese-compatability-userscript/tags).
 
-## Need an official Svelte framework?
+### Greasy Fork
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+The user script is registered on GreasyFork at the below url. It is configured to automatically update when a new release is published on this repository.
 
-## Technical considerations
+<https://greasyfork.org/en/scripts/517065-migaku-duchinese-compatability-userscript>
 
-**Why use this over SvelteKit?**
+Instructions explaining how to install a user script through Greasy Fork can be found [here](https://greasyfork.org/en/help/installing-user-scripts).
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+## Usage
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+Once the User Script has been installed on your preferred user script manager and is enabled it will automatically run on any DuChinese lesson. You can temporarily disable the user script through the user script manager to access DuChinese's standard UI _(page refresh required)_.
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+### Features
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+#### Plain Text Lesson Content
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+The user script will automatically replace the dynamic lesson content with plain text. This allows Migaku to read the text and inject its own dynamic UI.
 
-**Why include `.vscode/extensions.json`?**
+#### Maintain Migaku Styling On Navigation
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+The DuChinese web application currently resets the classes set on the document body every time the user navigates. This results in Migaku's injected styling being removed after navigation to a new page. The user script monitors this behavior and restores the removed Migaku classes on the document body when they are removed by DuChinese. The result is consistent Migaku styling when navigating the DuChinese web app.
 
-**Why enable `allowJs` in the TS template?**
+## Issues
 
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
+Please report any bugs you find, or submit feedback, through the [issues page of this repository](https://github.com/halcarleton/migaku-duchinese-compatability-userscript/issues).
 
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+Before submitting a bug report or feedback please check the existing issues to be sure it hasn't already been reported.
