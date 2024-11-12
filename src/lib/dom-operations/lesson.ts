@@ -60,7 +60,6 @@ export async function getLessonTextContent(
   lessonContent: LessonContent,
   previous?: string
 ): Promise<string> {
-  console.log("GetLessonTextContent");
   const textContent: string = await waitFor(() => {
     const canvasEls = [...lessonContent.element.querySelectorAll("canvas")];
     const content = canvasEls
@@ -69,15 +68,12 @@ export async function getLessonTextContent(
       .trim();
     const hasChanged = content !== previous;
 
-    console.log("> GetLessonTextContent poller", hasChanged);
     if (content.includes("Loading") || !hasChanged) {
       return "";
     }
 
     return content;
   });
-
-  console.log("> GetLessonTextContent textContent", textContent);
 
   return textContent;
 }
@@ -136,10 +132,6 @@ export async function getSelectedCharSet(
 }
 
 export async function applyPlainTextUI(lessonElements: LessonElements) {
-  console.log(
-    "APPLY PLAIN TEXT UI",
-    lessonElements.lessonContent.element.parentElement
-  );
   const characterSet = await getSelectedCharSet(lessonElements.pageFooter);
   lessonElements.lessonContent.plainTextLessonContent.characterSet =
     characterSet;
@@ -153,12 +145,9 @@ export async function applyPlainTextUI(lessonElements: LessonElements) {
     lessonElements.lessonContent.plainTextLessonContent,
     lessonElements.lessonContent.element
   );
-
-  console.log("APPLIED PLAIN TEXT");
 }
 
 export async function applyOriginalUI(lessonElements: LessonElements) {
-  console.log("APPLY ORIGINAL UI");
   lessonElements.lessonContent.plainTextLessonContent.parentElement?.replaceChild(
     lessonElements.lessonContent.element,
     lessonElements.lessonContent.plainTextLessonContent
